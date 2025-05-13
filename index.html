@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auto Fill Form</title>
+</head>
+<body>
+  <h2>Auto-Filled Task Form</h2>
+  <form>
+    <input type="text" id="name" placeholder="Name"><br><br>
+    <input type="email" id="email" placeholder="Email"><br><br>
+    <input type="text" id="task" placeholder="Task Description"><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    fetch("http://127.0.0.1:8000/tasks")
+      .then(res => res.json())
+      .then(data => {
+        if (data.length > 0) {
+          document.getElementById("task").value = data[0].task;
+        }
+      })
+      .catch(err => console.error("Fetch error:", err));
+  </script>
+</body>
+</html>
